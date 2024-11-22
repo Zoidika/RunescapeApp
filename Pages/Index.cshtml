@@ -5,6 +5,40 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Runescape Equipment Planner</h1>
+    <p>A page that will help you view and test different equipment for the game <a target="_blank" href="https://oldschool.runescape.wiki/">OldSchool Runescape</a>.</p>
 </div>
+
+<form method="post" class="form">
+    <div class="form-box mb-3 mt-3">
+        <select name="SelectedIds">
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Head").First().PositionId))
+            {
+                <option selected="@(!Model.SelectedIds.Any(e => e == item.EquipmentId))">Head Slot</option>
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Neck").First().PositionId))
+            {
+                <option selected="@(!Model.SelectedIds.Any(e => e == item.EquipmentId))">Neck Slot</option>
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Legs").First().PositionId))
+            {
+                <option selected="@(!Model.SelectedIds.Any(e => e == item.EquipmentId))">Legs</option>
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+
+@if(Model.Stats != null)
+{
+    <div>
+        <p>Total Stab Value:</p><p>@Model.Stats.Stab</p>
+    </div>
+}
