@@ -8,5 +8,6 @@
         //{
         //    PositionName = positionName;
         //}
+        private Position() { }
     }
 }

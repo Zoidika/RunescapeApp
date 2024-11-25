@@ -1,16 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RunescapeApp.Data;
+using RunescapeApp.Services;
 
 namespace RunescapeApp.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
+        private readonly EquipmentService service;
+        private readonly RunescapeContext dbContext;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(ILogger<IndexModel> logger, EquipmentService service)
         {
             _logger = logger;
+            this.service = service;
         }
 
         public List<Position> Positions { get; set; }
@@ -18,14 +22,14 @@ namespace RunescapeApp.Pages
         [BindProperty]
         public List<int> SelectedIds { get; set; } = new List<int>();
         public Stats Stats { get; set; }
-        public void OnGet()
+        public async Task OnGet()
         {
-            GetData();
+            await GetData();
             Console.WriteLine("Get");
         }
-        public void OnPost()
+        public async Task OnPost()
         {
-            GetData();
+            await GetData();
             Console.WriteLine("Post");
             Stats = new Stats();
             foreach (var item in SelectedIds) 
@@ -36,21 +40,12 @@ namespace RunescapeApp.Pages
                 Stats.Slash = Stats.Slash + newSlash;
             } 
         }
-        public void GetData()
+        public async Task GetData()
         {
-            Positions = new List<Position>()
-            {
-                 new Position() { PositionName="Head", PositionId=1 },
-                 new Position() { PositionId=2, PositionName="Neck"},
-                 new Position() { PositionName="Legs", PositionId =3},
-
-            };
-            Equipment = new List<Equipment>()
-            {
-                new Equipment() { EquipmentId=0, PositionId=Positions.Where(e => e.PositionName=="Head").FirstOrDefault().PositionId, Name="Dragon Med Helm", Stab=10, Slash=45},
-                new Equipment() { EquipmentId=1, PositionId=Positions.Where(e => e.PositionName=="Neck").FirstOrDefault().PositionId, Name="Amulet Of Glory", Stab=18, Slash = 22 },
-                new Equipment() { EquipmentId=2, PositionId=Positions.Where(e => e.PositionName=="Legs").FirstOrDefault().PositionId, Name="Dharok's Platelegs", Stab=25, Slash=19}
-            };
+           
+            Positions = await service.ReturnPositionList();
+            
+            Equipment = await service.ReturnEquipmentList();
         }
     }
 }

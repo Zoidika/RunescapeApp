@@ -12,23 +12,34 @@
 <form method="post" class="form">
     <div class="form-box mb-3 mt-3">
         <select name="SelectedIds">
+            <option>Head</option>
             @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Head").First().PositionId))
             {
-                <option selected="@(!Model.SelectedIds.Any(e => e == item.EquipmentId))">Head Slot</option>
+                
                 <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
             }
         </select>
         <select name="SelectedIds">
+            <option>Neck</option>
             @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Neck").First().PositionId))
             {
-                <option selected="@(!Model.SelectedIds.Any(e => e == item.EquipmentId))">Neck Slot</option>
+                
                 <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
             }
         </select>
         <select name="SelectedIds">
+            <option>Legs</option>
             @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Legs").First().PositionId))
             {
-                <option selected="@(!Model.SelectedIds.Any(e => e == item.EquipmentId))">Legs</option>
+                
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Main Hand</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "MainHand").First().PositionId))
+            {
+                
                 <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
             }
         </select>
