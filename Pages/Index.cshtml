@@ -12,7 +12,7 @@
 <form method="post" class="form">
     <div class="form-box mb-3 mt-3">
         <select name="SelectedIds">
-            <option>Head</option>
+            <option>Head Slot</option>
             @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Head").First().PositionId))
             {
                 
@@ -20,7 +20,7 @@
             }
         </select>
         <select name="SelectedIds">
-            <option>Neck</option>
+            <option>Neck Slot</option>
             @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Neck").First().PositionId))
             {
                 
@@ -28,8 +28,16 @@
             }
         </select>
         <select name="SelectedIds">
-            <option>Legs</option>
-            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Legs").First().PositionId))
+            <option>Back Slot</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Back").First().PositionId))
+            {
+                
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Ammo Slot</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Ammo").First().PositionId))
             {
                 
                 <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
@@ -39,7 +47,63 @@
             <option>Main Hand</option>
             @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "MainHand").First().PositionId))
             {
-                
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Main two Hand</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Main2Hand").First().PositionId))
+            {
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Chest Slot</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Chest").First().PositionId))
+            {
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Off Hand</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "OffHand").First().PositionId))
+            {
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Leg Slot</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Legs").First().PositionId))
+            {
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Glove Slot</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Gloves").First().PositionId))
+            {
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Foot Slot</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Feet").First().PositionId))
+            {
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Ring Slot</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Ring").First().PositionId))
+            {
+
                 <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
             }
         </select>
@@ -52,5 +116,18 @@
     <div>
         <p>Total Stab Value:</p><p>@Model.Stats.Stab</p>
         <p>Total Slash Value:</p><p>@Model.Stats.Slash</p>
+        <p>Total Crush Value:</p><p>@Model.Stats.Crush</p>
+        <p>Total Magic Value:</p><p>@Model.Stats.Magic</p>
+        <p>Total Ranged Value:</p><p>@Model.Stats.Ranged</p>
+        <p>Total Stab Defence Value:</p><p>@Model.Stats.StabDef</p>
+        <p>Total Slash Defence Value:</p><p>@Model.Stats.SlashDef</p>
+        <p>Total Crush Defence Value:</p><p>@Model.Stats.CrushDef</p>
+        <p>Total Magic Defence Value:</p><p>@Model.Stats.MagicDef</p>
+        <p>Total Ranged Defence Value:</p><p>@Model.Stats.RangedDef</p>
+        <p>Total Strength Bonus Value:</p><p>@Model.Stats.StrengthBonus</p>
+        <p>Total Magic Bonus Value:</p><p>@Model.Stats.MagicBonus</p>
+        <p>Total Ranged Bonus Value:</p><p>@Model.Stats.RangedBonus</p>
+        <p>Total Prayer Bonus Value:</p><p>@Model.Stats.PrayerBonus</p>
+        <p>Does the weapon have a special attack:</p><p>@(Model.Stats.SpecialAttack ? "Yes" : "No" )</p>
     </div>
 }
