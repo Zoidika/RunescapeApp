@@ -32,6 +32,8 @@ namespace RunescapeApp.Pages
             {
                 var newStab = Equipment.Where(e => e.EquipmentId == item).FirstOrDefault().Stab;
                 Stats.Stab = Stats.Stab + newStab;
+                var newSlash = Equipment.Where(e => e.EquipmentId == item).FirstOrDefault().Slash;
+                Stats.Slash = Stats.Slash + newSlash;
             } 
         }
         public void GetData()
@@ -45,9 +47,9 @@ namespace RunescapeApp.Pages
             };
             Equipment = new List<Equipment>()
             {
-                new Equipment() { EquipmentId=0, PositionId=Positions.Where(e => e.PositionName=="Head").FirstOrDefault().PositionId, Name="Dragon Med Helm", Stab=10},
-                new Equipment() { EquipmentId=1, PositionId=Positions.Where(e => e.PositionName=="Neck").FirstOrDefault().PositionId, Name="Amulet Of Glory", Stab=18 },
-                new Equipment() { EquipmentId=2, PositionId=Positions.Where(e => e.PositionName=="Legs").FirstOrDefault().PositionId, Name="Dharok's Platelegs", Stab=25}
+                new Equipment() { EquipmentId=0, PositionId=Positions.Where(e => e.PositionName=="Head").FirstOrDefault().PositionId, Name="Dragon Med Helm", Stab=10, Slash=45},
+                new Equipment() { EquipmentId=1, PositionId=Positions.Where(e => e.PositionName=="Neck").FirstOrDefault().PositionId, Name="Amulet Of Glory", Stab=18, Slash = 22 },
+                new Equipment() { EquipmentId=2, PositionId=Positions.Where(e => e.PositionName=="Legs").FirstOrDefault().PositionId, Name="Dharok's Platelegs", Stab=25, Slash=19}
             };
         }
     }
