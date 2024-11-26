@@ -1,4 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using RunescapeApp.Data;
+using RunescapeApp.Services;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<RunescapeContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Database"));
+    options.EnableDetailedErrors();
+});
+builder.Services.AddTransient<EquipmentService>();
+
 
 // Add services to the container.
 builder.Services.AddRazorPages();

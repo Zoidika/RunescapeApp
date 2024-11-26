@@ -5,6 +5,245 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Runescape Equipment Planner</h1>
+    <p>A page that will help you view and test different equipment for the game <a target="_blank" href="https://oldschool.runescape.wiki/">OldSchool Runescape</a>.</p>
 </div>
+
+<form method="post" class="form">
+    <div class="form-box mb-3 mt-3">
+        <select name="SelectedIds">
+            <option>Head Slot</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Head").First().PositionId))
+            {
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Neck Slot</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Neck").First().PositionId))
+            {
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Back Slot</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Back").First().PositionId))
+            {
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Ammo Slot</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Ammo").First().PositionId))
+            {
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Main Hand</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "MainHand").First().PositionId))
+            {
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option value="0">Main two Hand</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Main2Hand").First().PositionId))
+            {
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Chest Slot</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Chest").First().PositionId))
+            {
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Off Hand</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "OffHand").First().PositionId))
+            {
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Leg Slot</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Legs").First().PositionId))
+            {
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Glove Slot</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Gloves").First().PositionId))
+            {
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Foot Slot</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Feet").First().PositionId))
+            {
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+        <select name="SelectedIds">
+            <option>Ring Slot</option>
+            @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Ring").First().PositionId))
+            {
+
+                <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
+            }
+        </select>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+
+@if (Model.Stats != null)
+{
+    @* <div class="d-flex">
+        <p>Total Stab Value:</p><p>@Model.Stats.Stab</p>
+        <p>Total Slash Value:</p><p>@Model.Stats.Slash</p>
+        <p>Total Crush Value:</p><p>@Model.Stats.Crush</p>
+        <p>Total Magic Value:</p><p>@Model.Stats.Magic</p>
+        <p>Total Ranged Value:</p><p>@Model.Stats.Ranged</p>
+        <p>Total Stab Defence Value:</p><p>@Model.Stats.StabDef</p>
+        <p>Total Slash Defence Value:</p><p>@Model.Stats.SlashDef</p>
+        <p>Total Crush Defence Value:</p><p>@Model.Stats.CrushDef</p>
+        <p>Total Magic Defence Value:</p><p>@Model.Stats.MagicDef</p>
+        <p>Total Ranged Defence Value:</p><p>@Model.Stats.RangedDef</p>
+        <p>Total Strength Bonus Value:</p><p>@Model.Stats.StrengthBonus</p>
+        <p>Total Magic Bonus Value:</p><p>@Model.Stats.MagicBonus</p>
+        <p>Total Ranged Bonus Value:</p><p>@Model.Stats.RangedBonus</p>
+        <p>Total Prayer Bonus Value:</p><p>@Model.Stats.PrayerBonus</p>
+        <p>Does the equipped weapon have a special attack?:</p><p>@(Model.Stats.SpecialAttack ? "Yes" : "No")</p>
+    </div> *@
+
+    <div>
+        <div class="py-1">
+            <div class="flex gap-4 justify-center">
+                <div class="w-[95px]">
+                    <p class="text-sm text-gray-500 dark:text-gray-300">Offensive</p>
+                    <div class="flex flex-col gap-1 mt-3 text-center">
+                        <div class="flex items-center" title="Stab">
+                            <div class="basis-10">
+                                <img alt="Stab" loading="lazy" width="21" height="31" decoding="async" data-nimg="1" style="color:transparent" src="https://tools.runescape.wiki/osrs-dps/_next/static/media/dagger.23b640d2.png">
+                            </div>
+                            <div class="basis-12">
+                                <div class="w-full font-mono text-left py-[.25em] px-[.5em] text-sm border border-zinc-400 dark:border-dark-200 rounded">@Model.Stats.Stab</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center" title="Slash">
+                            <div class="basis-10">
+                                <img alt="Slash" loading="lazy" width="27" height="30" decoding="async" data-nimg="1" style="color:transparent" src="https://tools.runescape.wiki/osrs-dps/_next/static/media/scimitar.9ddfeb9e.png">
+                            </div>
+                            <div class="basis-12">
+                                <div class="w-full font-mono text-left py-[.25em] px-[.5em] text-sm border border-zinc-400 dark:border-dark-200 rounded">@Model.Stats.Slash</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center" title="Crush">
+                            <div class="basis-10"><img alt="Crush" loading="lazy" width="22" height="29" decoding="async" data-nimg="1" style="color:transparent" src="https://tools.runescape.wiki/osrs-dps/_next/static/media/warhammer.bf1e6866.png"></div>
+                            <div class="basis-12">
+                                <div class="w-full font-mono text-left py-[.25em] px-[.5em] text-sm border border-zinc-400 dark:border-dark-200 rounded">@Model.Stats.Crush</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center" title="Magic">
+                            <div class="basis-10"><img alt="Magic" loading="lazy" width="25" height="23" decoding="async" data-nimg="1" style="color:transparent" src="https://tools.runescape.wiki/osrs-dps/_next/static/media/magic.ea5daf44.png"></div>
+                            <div class="basis-12">
+                                <div class="w-full font-mono text-left py-[.25em] px-[.5em] text-sm border border-zinc-400 dark:border-dark-200 rounded">@Model.Stats.Magic</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center" title="Ranged">
+                            <div class="basis-10"><img alt="Ranged" loading="lazy" width="23" height="23" decoding="async" data-nimg="1" style="color:transparent" src="https://tools.runescape.wiki/osrs-dps/_next/static/media/ranged.bee4115c.png"></div>
+                            <div class="basis-12">
+                                <div class="w-full font-mono text-left py-[.25em] px-[.5em] text-sm border border-zinc-400 dark:border-dark-200 rounded">@Model.Stats.Ranged</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-[95px]">
+                    <p class="text-sm text-gray-500 dark:text-gray-300">Defensive</p>
+                    <div class="flex flex-col gap-1 mt-3 text-center">
+                        <div class="flex items-center" title="Stab">
+                            <div class="basis-10"><img alt="Stab" loading="lazy" width="21" height="31" decoding="async" data-nimg="1" style="color:transparent" src="https://tools.runescape.wiki/osrs-dps/_next/static/media/dagger.23b640d2.png"></div>
+                            <div class="basis-12">
+                                <div class="w-full font-mono text-left py-[.25em] px-[.5em] text-sm border border-zinc-400 dark:border-dark-200 rounded">@Model.Stats.StabDef</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center" title="Slash">
+                            <div class="basis-10"><img alt="Slash" loading="lazy" width="27" height="30" decoding="async" data-nimg="1" style="color:transparent" src="https://tools.runescape.wiki/osrs-dps/_next/static/media/scimitar.9ddfeb9e.png"></div>
+                            <div class="basis-12">
+                                <div class="w-full font-mono text-left py-[.25em] px-[.5em] text-sm border border-zinc-400 dark:border-dark-200 rounded">@Model.Stats.SlashDef</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center" title="Crush">
+                            <div class="basis-10"><img alt="Crush" loading="lazy" width="22" height="29" decoding="async" data-nimg="1" style="color:transparent" src="https://tools.runescape.wiki/osrs-dps/_next/static/media/warhammer.bf1e6866.png"></div>
+                            <div class="basis-12">
+                                <div class="w-full font-mono text-left py-[.25em] px-[.5em] text-sm border border-zinc-400 dark:border-dark-200 rounded">@Model.Stats.CrushDef</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center" title="Magic">
+                            <div class="basis-10"><img alt="Magic" loading="lazy" width="25" height="23" decoding="async" data-nimg="1" style="color:transparent" src="https://tools.runescape.wiki/osrs-dps/_next/static/media/magic.ea5daf44.png"></div>
+                            <div class="basis-12">
+                                <div class="w-full font-mono text-left py-[.25em] px-[.5em] text-sm border border-zinc-400 dark:border-dark-200 rounded">@Model.Stats.MagicDef</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center" title="Ranged">
+                            <div class="basis-10"><img alt="Ranged" loading="lazy" width="23" height="23" decoding="async" data-nimg="1" style="color:transparent" src="https://tools.runescape.wiki/osrs-dps/_next/static/media/ranged.bee4115c.png"></div>
+                            <div class="basis-12">
+                                <div class="w-full font-mono text-left py-[.25em] px-[.5em] text-sm border border-zinc-400 dark:border-dark-200 rounded">@Model.Stats.RangedDef</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-[95px]">
+                    <p class="text-sm text-gray-500 dark:text-gray-300">Other</p>
+                    <div class="flex flex-col gap-1 mt-3 text-center">
+                        <div class="flex items-center" title="Strength">
+                            <div class="basis-10"><img alt="Strength" loading="lazy" width="16" height="20" decoding="async" data-nimg="1" style="color:transparent" src="https://tools.runescape.wiki/osrs-dps/_next/static/media/strength.588608dd.png"></div>
+                            <div class="basis-12">
+                                <div class="w-full font-mono text-left py-[.25em] px-[.5em] text-sm border border-zinc-400 dark:border-dark-200 rounded">@Model.Stats.StrengthBonus</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center" title="Ranged Strength">
+                            <div class="basis-10"><img alt="Ranged Strength" loading="lazy" width="26" height="25" decoding="async" data-nimg="1" style="color:transparent" src="https://tools.runescape.wiki/osrs-dps/_next/static/media/ranged_strength.b19597e6.png"></div>
+                            <div class="basis-12">
+                                <div class="w-full font-mono text-left py-[.25em] px-[.5em] text-sm border border-zinc-400 dark:border-dark-200 rounded">@Model.Stats.RangedBonus</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center" title="Magic Strength">
+                            <div class="basis-10"><img alt="Magic Strength" loading="lazy" width="28" height="28" decoding="async" data-nimg="1" style="color:transparent" src="https://tools.runescape.wiki/osrs-dps/_next/static/media/magic_strength.3bfc40c9.png"></div>
+                            <div class="basis-12">
+                                <div class="w-full font-mono text-left py-[.25em] px-[.5em] text-sm border border-zinc-400 dark:border-dark-200 rounded">@Model.Stats.MagicBonus %</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center" title="Prayer">
+                            <div class="basis-10"><img alt="Prayer" loading="lazy" width="23" height="23" decoding="async" data-nimg="1" style="color:transparent" src="https://tools.runescape.wiki/osrs-dps/_next/static/media/prayer.2f027df7.png"></div>
+                            <div class="basis-12">
+                                <div class="w-full font-mono text-left py-[.25em] px-[.5em] text-sm border border-zinc-400 dark:border-dark-200 rounded">@Model.Stats.PrayerBonus</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center" title="Attack Speed">
+                            <div class="basis-10"><img alt="Attack Speed" loading="lazy" width="25" height="25" decoding="async" data-nimg="1" style="color:transparent" src="https://tools.runescape.wiki/osrs-dps/_next/static/media/attack_speed.75298fbe.png"></div>
+                            <div class="basis-12">
+                                <div class="w-full font-mono text-left py-[.25em] px-[.5em] text-sm border border-zinc-400 dark:border-dark-200 rounded">@(Model.Stats.SpecialAttack ? "Yes" : "No")</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

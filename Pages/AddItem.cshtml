@@ -1,0 +1,67 @@
+﻿@page
+@model RunescapeApp.Pages.AddItemModel
+@{
+}
+
+<div>
+    <h1 class="title">Create a new piece of Equipment</h1>
+</div>
+<form method="post">
+    <select id="PositionSelect" name="Equipment.PositionId" onchange="ShowHideSpecial();">
+        @foreach (var item in Model.Positions)
+        {
+            <option value="@item.PositionId">@item.PositionName</option>
+        }
+    </select>
+    <select name="Equipment.RarityId">
+        @foreach (var item in Model.Rarities)
+        {
+            <option value="@item.RarityId">@item.RarityLevel</option>
+        }
+    </select>
+    <div>
+        
+        <label>Name: <input asp-for="@Model.Equipment.Name" type="text" style="width:250px" /></label>
+        <p>Attack stats:</p>
+    <label>Stab: <input asp-for="@Model.Equipment.Stab" type="number" style="width:50px" /></label>
+        <label>Slash: <input asp-for="@Model.Equipment.Slash" type="number" style="width:50px" /></label>
+        <label>Crush: <input asp-for="@Model.Equipment.Crush" type="number" style="width:50px" /></label>
+        <label>Magic: <input asp-for="@Model.Equipment.Magic" type="number" style="width:50px" /></label>
+        <label>Ranged: <input asp-for="@Model.Equipment.Ranged" type="number" style="width:50px" /></label>
+        
+    </div>
+    <div>
+        <p>Defensive stats:</p>
+        <label>Stab Defence: <input asp-for="@Model.Equipment.StabDef" type="number" style="width:50px" /></label>
+        <label>Slash Defence: <input asp-for="@Model.Equipment.SlashDef" type="number" style="width:50px" /></label>
+        <label>Crush Defence: <input asp-for="@Model.Equipment.CrushDef" type="number" style="width:50px" /></label>
+        <label>Magic Defence: <input asp-for="@Model.Equipment.MagicDef" type="number" style="width:50px" /></label>
+        <label>Ranged Defence: <input asp-for="@Model.Equipment.RangedDef" type="number" style="width:50px" /></label>
+        
+    </div>
+    <div>
+        <p>Other stats: </p>
+        <label>Strength Bonus: <input asp-for="@Model.Equipment.StrengthBonus" type="number" style="width:50px" /></label>
+        <label>Ranged Bonus: <input asp-for="@Model.Equipment.RangedBonus" type="number" style="width:50px" /></label>
+        <label>Magic Bonus: <input asp-for="@Model.Equipment.MagicBonus" type="number" style="width:50px" /></label>
+        <label>Prayer Bonus: <input asp-for="@Model.Equipment.PrayerBonus" type="number" style="width:50px" /></label>
+        <label id="SpecialDisplay" style="display:none">Does this weapon have a special attack?: <input asp-for="@Model.Equipment.SpecialAttack" type="checkbox" style="width:50px" /></label>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    function ShowHideSpecial()
+    {
+        var dropdownValue = document.getElementById("PositionSelect").value;
+        console.log(document.getElementById("PositionSelect").value);
+        if (dropdownValue == 5 || dropdownValue == 6) 
+        {
+            document.getElementById("SpecialDisplay").style.display = "inline-block";
+        }
+        else 
+        {
+            document.getElementById("SpecialDisplay").style.display = "none";
+        }
+    }
+</script>
