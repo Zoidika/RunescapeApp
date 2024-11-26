@@ -22,6 +22,10 @@ namespace RunescapeApp.Services
         {
             return await dbContext.Equipment.ToListAsync();
         }
+        public async Task<List<Rarity>> ReturnRarityList()
+        {
+            return await dbContext.Rarities.ToListAsync();
+        }
 
     }
 }
