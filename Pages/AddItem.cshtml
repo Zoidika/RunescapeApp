@@ -7,7 +7,7 @@
     <h1 class="title">Create a new piece of Equipment</h1>
 </div>
 <form method="post">
-    <select name="Equipment.PositionId">
+    <select id="PositionSelect" name="Equipment.PositionId" onchange="ShowHideSpecial();">
         @foreach (var item in Model.Positions)
         {
             <option value="@item.PositionId">@item.PositionName</option>
@@ -45,7 +45,23 @@
         <label>Ranged Bonus: <input asp-for="@Model.Equipment.RangedBonus" type="number" style="width:50px" /></label>
         <label>Magic Bonus: <input asp-for="@Model.Equipment.MagicBonus" type="number" style="width:50px" /></label>
         <label>Prayer Bonus: <input asp-for="@Model.Equipment.PrayerBonus" type="number" style="width:50px" /></label>
-        <label>Does this weapon have a special attack?: <input asp-for="@Model.Equipment.SpecialAttack" type="checkbox" style="width:50px" /></label>
+        <label id="SpecialDisplay" style="display:none">Does this weapon have a special attack?: <input asp-for="@Model.Equipment.SpecialAttack" type="checkbox" style="width:50px" /></label>
     </div>
     <button type="submit">Submit</button>
 </form>
+
+<script>
+    function ShowHideSpecial()
+    {
+        var dropdownValue = document.getElementById("PositionSelect").value;
+        console.log(document.getElementById("PositionSelect").value);
+        if (dropdownValue == 5 || dropdownValue == 6) 
+        {
+            document.getElementById("SpecialDisplay").style.display = "inline-block";
+        }
+        else 
+        {
+            document.getElementById("SpecialDisplay").style.display = "none";
+        }
+    }
+</script>

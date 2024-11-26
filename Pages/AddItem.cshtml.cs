@@ -21,9 +21,11 @@ namespace RunescapeApp.Pages
         {
             await GetData();
         }
-        public async Task OnPost()
+        public async Task<IActionResult> OnPost()
         {
             await GetData();
+            await service.AddNewEquipment(Equipment);
+            return RedirectToPage("./Index");
         }
         public async Task GetData()
         {

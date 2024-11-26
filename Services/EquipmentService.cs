@@ -26,6 +26,11 @@ namespace RunescapeApp.Services
         {
             return await dbContext.Rarities.ToListAsync();
         }
+        public async Task AddNewEquipment(Equipment equipment)
+        {
+            await dbContext.Equipment.AddAsync(equipment);
+            await dbContext.SaveChangesAsync();
+        }
 
     }
 }
