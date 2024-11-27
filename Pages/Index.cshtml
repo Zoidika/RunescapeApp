@@ -52,7 +52,7 @@
             }
         </select>
         <select name="SelectedIds">
-            <option value="0">Main two Hand</option>
+            <option>Main two Hand</option>
             @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Main2Hand").First().PositionId))
             {
 
