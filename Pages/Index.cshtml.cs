@@ -22,12 +22,14 @@ namespace RunescapeApp.Pages
         [BindProperty]
         public List<int> SelectedIds { get; set; } = new List<int>();
         public Stats Stats { get; set; }
+        [BindProperty]
+        public string LevelFilter { get; set; }
         public async Task OnGet()
         {
             await GetData();
             Console.WriteLine("Get");
         }
-        public async Task OnPost()
+        public async Task<IActionResult> OnPost()
         {
             await GetData();
             Console.WriteLine("Post");
@@ -67,7 +69,20 @@ namespace RunescapeApp.Pages
                 {
                     Stats.SpecialAttack = true;
                 }
+                
             } 
+            return Page();
+        }
+        public async Task<IActionResult> OnPostFilter()
+        {
+            await GetData();
+
+            
+            return Page();
+        }
+        public async Task<IActionResult> OnPostReset()
+        {
+            return RedirectToPage();
         }
         public async Task GetData()
         {
@@ -75,6 +90,14 @@ namespace RunescapeApp.Pages
             Positions = await service.ReturnPositionList();
             
             Equipment = await service.ReturnEquipmentList();
+
+            if (!string.IsNullOrEmpty(LevelFilter))
+            {
+                var rarities = await service.ReturnRarityList();
+                var raritiesIds = rarities.Where(e => e.RarityLevel <= int.Parse(LevelFilter)).Select(e => e.RarityId).ToList();
+                Equipment = Equipment.Where(e => raritiesIds.Contains(e.RarityId)).ToList();
+
+            }
         }
     }
 }
