@@ -25,6 +25,11 @@ body {
     justify-content: center;
 }
 
+.new-button {
+    background-color: #6c1d1db5 !important;
+    color: white !important;
+    border-radius: 0.25rem !important;
+}
 
 
 /*

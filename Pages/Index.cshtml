@@ -4,35 +4,39 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
+<div class="text-center mb-3">
     <h1 class="display-4">Runescape Equipment Planner</h1>
     <p>A page that will help you view and test different equipment for the game <a target="_blank" href="https://oldschool.runescape.wiki/">OldSchool Runescape</a>.</p>
 </div>
 
 
 
-<form method="post" class="form">
+<form method="post" class="form mb-3" style="display: flex; flex-direction: column; flex-wrap: wrap; max-width: 500px; margin: auto; align-items: center">
     <div class="d-flex">
         @* @if (string.IsNullOrEmpty(Model.LevelFilter))
             { *@
         <label class="mr-2">
             Enter your Level:
             
-                <input asp-for="@Model.LevelFilter" />
+                <input asp-for="@Model.LevelFilter" style="width: 50px" />
             
         </label>
-            <button type="submit" asp-page-handler="Filter" class="mr-8">Submit Level</button>
+            <button type="submit" asp-page-handler="Filter" class="mr-8 ml-6 new-button" style="padding: 0 25px">Submit</button>
         @* }
         else
         {
             <p class="mr-8 font-bold">Level Selected: @Model.LevelFilter</p>
         } *@
-        <button type="submit" asp-page-handler="Reset">Reset</button>
+        <button type="submit" asp-page-handler="Reset" class="new-button" style="padding: 0 25px">Reset</button>
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage2))
+        {
+            <p class="text-danger">Something has gone wrong with the input of your level! please press reset and enter your level like: "10" or "45"!</p>
+        }
     </div>
 
    @*  @if (!string.IsNullOrEmpty(Model.LevelFilter))
     { *@
-    <div class="form-box mb-3 mt-3">
+    <div class="form-box mb-3 mt-3" style=" display: flex; flex-wrap: wrap; flex-direction: row; justify-content: space-around">
         
         <select name="SelectedIds" class="dropdown2">
             <option>Head Slot</option>
@@ -132,8 +136,15 @@
         </select>
         
     </div>
-    <button type="submit" asp-page-handler="">Submit</button>
-        @* } *@
+    <button type="submit" asp-page-handler="" class="new-button" style="width: 100px">
+        Submit
+    </button>
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <p class="text-danger">Something has gone wrong with the Equipment and Levels you have entered, please press reset and try again!</p>
+    }
+    
+    @* } *@
 </form>
 
 @if (Model.Stats != null)
