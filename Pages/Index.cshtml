@@ -15,7 +15,7 @@
     <div class="d-flex">
         @* @if (string.IsNullOrEmpty(Model.LevelFilter))
             { *@
-        <label class="mr-2">
+        <label id="LevelSelector" class="mr-2">
             Enter your Level:
             
                 <input asp-for="@Model.LevelFilter" style="width: 50px" />
@@ -70,7 +70,7 @@
                 <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
             }
         </select>
-        <select name="SelectedIds" class="dropdown2">
+        <select name="SelectedIds" id="Main-Hand" class="dropdown2" onchange="DisableInvalidWeapons();">
             <option>Main Hand</option>
             @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "MainHand").First().PositionId))
             {
@@ -78,7 +78,7 @@
                 <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
             }
         </select>
-        <select name="SelectedIds" class="dropdown2">
+        <select name="SelectedIds" id="Main-two-Hand" class="dropdown2" onchange="DisableInvalidWeapons();">
             <option>Main two Hand</option>
             @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "Main2Hand").First().PositionId))
             {
@@ -94,7 +94,7 @@
                 <option selected="@Model.SelectedIds.Any(e => e == item.EquipmentId)" value="@item.EquipmentId">@item.Name</option>
             }
         </select>
-        <select name="SelectedIds" class="dropdown2">
+        <select name="SelectedIds" id="Off-Hand" class="dropdown2" onchange="DisableInvalidWeapons();">
             <option>Off Hand</option>
             @foreach (var item in Model.Equipment.Where(e => e.PositionId == Model.Positions.Where(e => e.PositionName == "OffHand").First().PositionId))
             {
@@ -289,4 +289,47 @@
     {
        width: 175px;
     }
+
+    select:disabled,
+    select[disabled] {
+        opacity: 0.5;
+    }
 </style>
+
+<script>
+    function ShowHideLevelInput() 
+    {
+        var inputtedLevel = document.getElementById("LevelSelector").Value;
+        console.log(inputtedLevel);
+    }
+
+    function DisableInvalidWeapons() 
+    {
+        var inputMainHand = document.getElementById("Main-Hand");
+        var inputOffHand = document.getElementById("Off-Hand");
+        var inputMainTwoHand = document.getElementById("Main-two-Hand");
+        console.log(inputMainHand.value, inputMainTwoHand.value, inputOffHand.value);
+        if (Number.isInteger(parseInt(inputMainTwoHand.value))) {
+            console.log("disable main-hand and off-hand")
+            inputMainHand.disabled = true;
+            inputOffHand.disabled = true;
+        }
+        else 
+        {
+            inputMainHand.disabled = false;
+            inputOffHand.disabled = false;
+        }
+        if (Number.isInteger(parseInt(inputMainHand.value)) || Number.isInteger(parseInt(inputOffHand.value)))
+            {
+                console.log("disabled 2h weapons")
+            inputMainTwoHand.disabled = true;
+        }
+        else 
+        {
+            inputMainTwoHand.disabled = false;
+        }
+
+    }
+</script>
+
+
