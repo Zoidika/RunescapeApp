@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.IdentityModel.Tokens;
 using RunescapeApp.Data;
 using RunescapeApp.Services;
 
@@ -26,6 +27,8 @@ namespace RunescapeApp.Pages
         public string LevelFilter { get; set; }
         public string ErrorMessage { get; set; }
         public string ErrorMessage2 { get; set; }
+        [BindProperty]
+        public string SearchRequest { get; set; }
         public async Task OnGet()
         {
             await GetData();
@@ -103,12 +106,28 @@ namespace RunescapeApp.Pages
         {
             return RedirectToPage();
         }
+        public async Task<IActionResult> OnPostSearch()
+        {
+            await GetData();
+            if (!SearchRequest.IsNullOrEmpty()) 
+            {
+                var SearchedEquipment = Equipment.Where(e => e.Name.ToLower() == SearchRequest.ToLower()).Select(e => e.EquipmentId).FirstOrDefault();
+                //SelectedIds = Equipment.Select(e => e.EquipmentId).ToList();
+                //SelectedIds = new List<int>(SelectedIds);
+                //SelectedIds = SelectedIds(SelectedIds, SearchRequest);
+                SelectedIds.Add(SearchedEquipment);
+
+            }
+            return Page();
+        }
         public async Task GetData()
         {
            
             Positions = await service.ReturnPositionList();
             
             Equipment = await service.ReturnEquipmentList();
+
+            
 
             if (!string.IsNullOrEmpty(LevelFilter))
             {
@@ -126,6 +145,7 @@ namespace RunescapeApp.Pages
                 
 
             }
+            Equipment = Equipment.OrderBy(e => e.Name).ToList();
         }
     }
 }

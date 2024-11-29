@@ -34,6 +34,14 @@
         }
     </div>
 
+    <div style="margin-top: 20px">
+        <label id="ItemSearch" class="mr-2">
+            Search for an item: 
+            <input asp-for="SearchRequest" style="width: 180px" />
+        </label>
+        <button type="submit" asp-page-handler="Search" class="new-button" style="padding: 0 25px">Search</button>
+    </div>
+
    @*  @if (!string.IsNullOrEmpty(Model.LevelFilter))
     { *@
     <div class="form-box mb-3 mt-3" style=" display: flex; flex-wrap: wrap; flex-direction: row; justify-content: space-around">
