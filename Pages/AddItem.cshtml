@@ -3,25 +3,34 @@
 @{
 }
 
-<div>
-    <h1 class="title">Create a new piece of Equipment</h1>
+<div style="display: flex; margin: auto; justify-content:center">
+    <h1 class="title" style="font-weight: 700; font-size:xx-large; margin-left:50px">Create a new piece of Equipment</h1>
 </div>
-<form method="post">
-    <select id="PositionSelect" name="Equipment.PositionId" onchange="ShowHideSpecial();">
+<form method="post" style="display: flex; justify-content:center">
+    <div style="display:flex; flex-direction:column">
+        <label>Name: <input asp-for="@Model.Equipment.Name" type="text" style="width:200px; height:40px; margin-top: 200px" /></label>
+        <label>Slot:
+    <select style="width: 200px; height:40px; margin-top:10px" id="PositionSelect" name="Equipment.PositionId" onchange="ShowHideSpecial();">
         @foreach (var item in Model.Positions)
         {
             <option value="@item.PositionId">@item.PositionName</option>
         }
-    </select>
-    <select name="Equipment.RarityId">
+            </select>
+        </label>
+        <label>Level Requirement:
+    <select style="width: 100px; height:40px; margin-top:10px" name="Equipment.RarityId">
         @foreach (var item in Model.Rarities)
         {
             <option value="@item.RarityId">@item.RarityLevel</option>
         }
-    </select>
-    <div>
+            </select>
+        </label>
+    </div>
+    <div style="display:flex; flex-direction:column">
         
-        <label>Name: <input asp-for="@Model.Equipment.Name" type="text" style="width:250px" /></label>
+    <div style="display:flex; flex-direction:column; align-items:flex-end; width:300px; flex-wrap:nowrap; padding-right:120px">
+        
+        
         <p>Attack stats:</p>
     <label>Stab: <input asp-for="@Model.Equipment.Stab" type="number" style="width:50px" /></label>
         <label>Slash: <input asp-for="@Model.Equipment.Slash" type="number" style="width:50px" /></label>
@@ -30,7 +39,7 @@
         <label>Ranged: <input asp-for="@Model.Equipment.Ranged" type="number" style="width:50px" /></label>
         
     </div>
-    <div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; width:300px; flex-wrap:nowrap; padding-right:120px">
         <p>Defensive stats:</p>
         <label>Stab Defence: <input asp-for="@Model.Equipment.StabDef" type="number" style="width:50px" /></label>
         <label>Slash Defence: <input asp-for="@Model.Equipment.SlashDef" type="number" style="width:50px" /></label>
@@ -39,7 +48,7 @@
         <label>Ranged Defence: <input asp-for="@Model.Equipment.RangedDef" type="number" style="width:50px" /></label>
         
     </div>
-    <div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; width:300px; flex-wrap:nowrap; padding-right:120px">
         <p>Other stats: </p>
         <label>Strength Bonus: <input asp-for="@Model.Equipment.StrengthBonus" type="number" style="width:50px" /></label>
         <label>Ranged Bonus: <input asp-for="@Model.Equipment.RangedBonus" type="number" style="width:50px" /></label>
@@ -47,7 +56,8 @@
         <label>Prayer Bonus: <input asp-for="@Model.Equipment.PrayerBonus" type="number" style="width:50px" /></label>
         <label id="SpecialDisplay" style="display:none">Does this weapon have a special attack?: <input asp-for="@Model.Equipment.SpecialAttack" type="checkbox" style="width:50px" /></label>
     </div>
-    <button type="submit" class="new-button">Submit</button>
+    </div>
+    <button type="submit" class="new-button" style="width:100px; height:100px; margin-top:250px">Submit</button>
 </form>
 
 <script>
