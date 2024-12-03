@@ -38,7 +38,7 @@ namespace RunescapeApp.Pages
         {
             await GetData();
                 Console.WriteLine("Post");
-            if (!Equipment.All(e => SelectedIds.Contains(e.EquipmentId)))
+            if (!Equipment.Any(e => SelectedIds.Contains(e.EquipmentId)))
             {
                 ErrorMessage = "Error";
 
